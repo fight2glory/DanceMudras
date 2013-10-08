@@ -1,0 +1,148 @@
+close all;
+clear all;
+clc;
+
+% filenames = dir(fullfile('./Final_Dataset','*.jpg'));
+% num_images = numel(filenames);
+% ind = randi(num_images,1);
+% filename = fullfile('./Final_Dataset',filenames(ind).name);
+% im = imread(filename);
+% im = imread('Testset');
+% path = input('Path of image to be classified: ');
+% im = imread(path);
+im = imread('Final_Dataset/78.jpg');
+
+[h s v] = rgb2hsv(im);
+m = mode(mode(h));
+if (m >= 0.6190 && m <= 0.7581)
+disp('Single Hand Mudra without accessories is being classified:');
+subplot(2,2,1);
+imshow(im);
+title('Original Image')
+hands = skin_detection2(im);
+subplot(2,2,2);
+imshow(hands)
+title('Skin Detected')
+contour = boundary_extraction2(hands,0,0.0);
+subplot(2,2,3);
+imshow(contour);
+title('Extracted Boundary')
+Finale = fingertip_detection3(contour,10);
+subplot(2,2,4);
+imshow(Finale);
+title('Final Output')
+figure,imshow(Finale)
+elseif (m > 0 && m <= 0.3000) || (m == 0.9899)
+    disp('Single Hand with accesories in Complex Background:');
+    subplot(3,2,1);
+    imshow(im);
+    title('Original Image')
+    [I1,I2,I3] = clustering(im);
+    temp1 = skin_detection(I1);
+    temp2 = skin_detection(I2);
+    temp3 = skin_detection(I3);
+    a = find(temp1 ~= 0);
+    b = find(temp2 ~= 0);
+    c = find(temp3 ~= 0);
+    s1 = size(a);
+    s2 = size(b);
+    s3 = size(c);
+    ind = max([s1,s2,s3]);
+    if ind == s1(1)
+        hands = I1(:,:,:);
+    elseif ind == s2(1)
+        hands = I2(:,:,:);
+    elseif ind == s3(1)
+        hands = I3(:,:,:);
+    end
+        subplot(3,2,2);
+    imshow(hands);
+    title('Skin Detected')
+%     figure,imshow(uint8(hands));
+%     title('Hand')
+    binary_hands = binarization(hands,0);
+    subplot(3,2,3);
+    imshow(binary_hands);
+    title('Binarised Image')
+%     figure,imshow(binary_hands);
+%     title('Binarized Hand')
+    L = bwlabel(binary_hands,8);
+    num_blobs = max(max(L));
+    for n = 1:num_blobs
+        [r,c] = find(L == n);
+        if size(r,1) <= 1500
+            binary_hands(r,c) = 0;
+        end
+    end
+    [contour chopped] = boundary_extraction2(binary_hands,1,0.0);
+     subplot(3,2,4);
+    imshow(chopped);
+    title('Extracted Boundary')
+    subplot(3,2,5);
+    imshow(contour);
+    title('Bounded Hand')
+    [Finale] = fingertip_detection3(contour,15);
+        subplot(3,2,6);
+    imshow(Finale);
+    title('Output Image');
+    figure,imshow(Finale);
+%     figure,imshow(binary_hands);
+%     title('Only Hands');
+elseif m == 0
+    disp('Hand with accesories and Plain Background')
+    subplot(3,2,1);
+imshow(im);
+title('Original Image')
+    hands = mehendi_removal(im);
+    subplot(3,2,2);
+    imshow(hands);
+    title('Mehendi Removed');
+    binary_hands = binarization(hands,50);
+    subplot(3,2,3);
+    imshow(binary_hands);
+    title('Binarised Image');
+%     figure,imshow(uint8(binary_hands));
+    [contour chopped] = boundary_extraction2(binary_hands,2,0.0);
+    subplot(3,2,4);
+    imshow(chopped);
+    title('Extracted Boundary')
+    subplot(3,2,5);
+    imshow(contour);
+    title('Bounded Hand')
+    [Finale] = fingertip_detection3(contour,15);
+        subplot(3,2,6);
+    imshow(Finale);
+    title('Output Image');
+    figure, imshow(Finale)
+elseif m >= 0.9680 && m <= 0.9690
+disp('Single Hand with accessories in Complex Background')
+    subplot(3,2,1);
+imshow(im);
+title('Original Image')
+hands = mehendi_removal(im);
+    subplot(3,2,2);
+imshow(hands);
+title('Mehendi Removed')
+binary_hand = binarization(hands,200);
+    subplot(3,2,3);
+imshow(binary_hand);
+title('Binarised Image')
+[chopped contour] = boundary_extraction2(binary_hand,1,1.0);
+    subplot(3,2,4);
+imshow(contour);
+title('Extracted Boundary')
+    subplot(3,2,5);
+imshow(chopped);
+title('Bounded Image')
+[Finale] = fingertip_detection3(contour,15);
+ subplot(3,2,6);
+imshow(Finale);
+title('Output Image')
+fi
+else
+    disp('Cannot classify hand');
+end
+% [I1,I2,I3] = clustering(im);
+% hands = skin_detection2(I2);
+% watershedtransform(rgb2gray(I2));
+% contour = boundary_extraction2(I2);

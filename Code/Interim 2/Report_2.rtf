@@ -1,0 +1,309 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+{\*\generator Msftedit 5.41.21.2509;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\ul\b\f0\fs22 DIP Interim Presentation:\par
+\b0 Group 1: \ulnone\par
+Varshanjali Sayyaparaju \par
+Aditya Singh\par
+Prateek Goel\tab\par
+\ul Problem Statement:\par
+\ulnone\b Goal:\b0   To identify the various hand gestures invovled in Indian classical dances in a given image.\par
+\b Purpose:\b0  Indian classical dance is a cultural art which conveys meaning in very step. Many people now a days do not appreciate the story behind the dance movements. This project is an attempt to identify the hand gestures of Indian classical dances so as to try and give meaning to each gesture, and understand the story behind it. \par
+\b Block Diagram:\par
+\b0 Image 1\par
+\b Deliverables:\par
+\b0\i Minimum: \i0 Recognition of hand gesture without accessories in certain classical dances.\par
+\i Maximum: \i0 Recognition of hand gestrue with accessories.i.e mehendi, bangles, rings...etc.\par
+\b Interim 1 Results:\par
+\ul\b0 Dataset:\par
+\ulnone Image2  \par
+Image3 \par
+Image4 \par
+Image5\par
+Constraints:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-270\li270\sa200\sl276\slmult1 Bharatnatyam mudras\par
+{\pntext\f1\'B7\tab}Single hand mudras\par
+{\pntext\f1\'B7\tab}Right hand\par
+{\pntext\f1\'B7\tab}No embellishments\par
+{\pntext\f1\'B7\tab}No other objects\par
+\pard\sa200\sl276\slmult1\ul Implemented:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li360\sa200\sl276\slmult1\ulnone Segmentation of hand\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi180\li360\sa200\sl276\slmult1\tab Basic Thresholding\par
+{\pntext\f1\'B7\tab}\tab Skin Detection\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li360\sa200\sl276\slmult1 Boundary Extraction\par
+{\pntext\f1\'B7\tab}Detection of finger\par
+\pard\sa200\sl276\slmult1\b Improvements:\par
+\ul\b0 Improvements in skin detection:\par
+\ulnone Skin detection results presented in the previous interim were sufficient for the working of further steps, but it was not perfect. The alogirthm has been been modified to segement the results perfectly.\par
+\i Method:\ul\i0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone Threshold in the RGB plane\par
+{\pntext\f1\'B7\tab}Threshold in the YCrCb plane\par
+{\pntext\f1\'B7\tab}Threshold in the  HSV plane\par
+{\pntext\f1\'B7\tab}At a location, if the pixel value in either of the color spaces is 255, then that location is given a pixel value of 255, else 0.\par
+\pard\sa200\sl276\slmult1\i Changes in Method:\ul\i0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone The previous code was segmenting the image using the Cr Cb from YCrCb color model  and the H plane in the HSV, but in this case we are using Cr, Cb, H,S,V, and R,G,B planes.\ul\par
+\ulnone{\pntext\f1\'B7\tab}In the previous code, we were stating that if the image's H, Cr, and Cb pixel values are above their respective thresholds, then the pixel is kept or else made to zero. In the new algorithm, we are thresholding in each color model seperately, and then checking if in either of the color spaces, the pixel passed the threshold. \ul\par
+\pard\sa200\sl276\slmult1\ulnone\i Results:\ul\i0\par
+\ulnone Image6\par
+Image6_1\par
+Image6_2\par
+Image7\par
+Image7_1\par
+Image7_2\par
+Image8\par
+Image8_1\par
+Image8_2\par
+Image9\par
+Image9_1\par
+Image9_2\ul\par
+\ulnone\i Observations:\ul\i0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone We can see that the holes on the hand such as in 9_1, 6_1  and and 7_1 are filled properly.\ul\par
+\ulnone{\pntext\f1\'B7\tab}8_1 which was not segmented at all has become properly segmented.\ul\par
+\pard\sa200\sl276\slmult1\ulnone\i Conclusions:\ul\i0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone Segementing the rgb plance helped in skin detection. Observing that the background was shades of blue, the range allowed to pass in the b-plane was less.\ul\par
+\ulnone{\pntext\f1\'B7\tab}Observing that the hand color is mainly varies from pink to white and increasing the range in the  plane  helped give better results.\ul\par
+\ulnone{\pntext\f1\'B7\tab}Segementing in the S plane of the HSV color model also helped because the there can be seen that on the hand, the color has a variety of shades, such as in 8. So allowing the range of saturation to vary a bit allowed better segmentation.\ul\par
+\ulnone{\pntext\f1\'B7\tab}Thresholding the V plane helped, because the amount of light falling on the hand varies, but it needs to be seperated from the light backgroun at the bottom end of the image, so setting proper thresholds in the V plane, along with help in the thresholding in the Hue and Saturation plane helped in giving better results.\ul\par
+\pard\sa200\sl276\slmult1 Improvements in Boundary Extraction:\par
+\ulnone There were cracks in i the boundary extracted, which has been perfected.\par
+\i Method:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Take the binary image produced from skin detection.\ul\par
+\ulnone{\pntext\f1\'B7\tab}Detect edge pixels by checking whether if atleast one pixels in neigbhorhood is zero, and make those pixels equal 255 and else 0.\ul\par
+\ulnone{\pntext\f1\'B7\tab}Reduced the boundary to one pixel width by using M-connectivity.\ul\par
+\pard\sa200\sl276\slmult1\ulnone\i Changes in Method:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Instead of using morphological operations, we used neighborhood processing.\ul\par
+\pard\sa200\sl276\slmult1\ulnone\i Results:\i0\par
+Image6\par
+Image6_3\par
+Image6_4\par
+Image7\par
+Image7_3\par
+Image7_4\par
+Image8\par
+Image8_3\par
+Image8_4\par
+Image9\par
+Image9_3\par
+image9_4\par
+  \i Observations:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 The cracks found in the image are gone, and it is a smooth border as can be seen in 7_3 and 7_4.\ul\par
+\ulnone{\pntext\f1\'B7\tab}Using morphological operations, the shape of the hand got distorted, while using neigbhorhood processing the shape of the hand remains the same, as can be seen in  8_3, and 8_4. \ul\par
+\ulnone{\pntext\f1\'B7\tab}The peaks and values caused by the different shapes of the hand are more prominent using  the neigbhorhood processing, as in 9_3, and 9_4.\ul\par
+\pard\sa200\sl276\slmult1\ulnone\i Conclusions:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Using morphological operations is not the best operation when the shape of the hand keeps changing, because then the structuring element needed will give different results for different shapes, as can be seen by comparing the results of 6_3 and 8_3. One hand is more distorted than the other.\ul\par
+\ulnone{\pntext\f1\'B7\tab}Using neighborhood processing will work for any shape, because it is looking for boundary in a binary image, and it will look at pixel by pixel, so distortion is less.\ul\par
+\pard\sa200\sl276\slmult1 Finger-tip detection:\par
+\ulnone Method 1 was implemented in the 1st Interim, but it wasn't working properly. We assumed it was because of improper boundary extraction. Below we try the same algorithm to test whether there is a improvement in the results.\par
+\b\i Method 1:\b0\i0  Calculating the euclidean distance from center of hand to each point on the boundary. When the distance exceeds a threshold, it is detected as a finger. \par
+\i Results:\par
+\i0 Image10\par
+Image10_2\par
+Image11\par
+Image11_2\par
+\i Observations:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 It can be observed that there is no difference in the results\par
+\pard\sa200\sl276\slmult1\i Conclusions:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 This method does not work, therefore we try a different method.\par
+\pard\sa200\sl276\slmult1\b\i Method 2: \b0\i0 k-curvature for finger identification\par
+\i Method:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Take binary hand image\ul\par
+\ulnone{\pntext\f1\'B7\tab}Look for peaks and valleys in the contour of the hand, becuse the peaks and valleys correspond to top and bottom of a finger.\ul\par
+\pard\sa200\sl276\slmult1\ulnone\i Results:\par
+\i0 Image12\par
+Image12_1\par
+Image13\par
+Image13_1\par
+Image 14\par
+Image 14_1\par
+Image15\par
+Image15_1\i\par
+Observations:\i0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Results include not location of finger-tips, but location of fingers\i\par
+\i0{\pntext\f1\'B7\tab}Finger detection can't be perfectly done considering that the fingers will be clubbed together in some cases, but it will give many peaks in the same region,which will help in PR.\i\par
+\pard\sa200\sl276\slmult1 Conclusions:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Finger-tip or finger detection of all fingers is hard, such as if they are in a cluster, but getting the position of the cluster of fingers is also helpful in PR\i\par
+\pard\sa200\sl276\slmult1\b\i0 New Work:\par
+\ul\b0 Dataset:\par
+\ulnone Images from Final Dataset\par
+Constrants:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Bharatnatyam mudras\par
+{\pntext\f1\'B7\tab}Double hand mudras\par
+\pard\sa200\sl276\slmult1\ul Process Overview:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone Segment out hands\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1440\sa200\sl276\slmult1 Skin detection\par
+{\pntext\f1\'B7\tab}Edge-detection\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1800\sa200\sl276\slmult1 Sobel\par
+{\pntext\f1\'B7\tab}Prewitt\par
+{\pntext\f1\'B7\tab}Gradient\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1440\sa200\sl276\slmult1 Color based segmentation using K-means clustering\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Distinguishing between hands\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li1440\sa200\sl276\slmult1 Boundary Extraction\par
+{\pntext\f1\'B7\tab}Watershed Transform\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Template Matching\i\par
+\pard\sa200\sl276\slmult1\ul\i0 Segmentation of hands:\par
+\ulnone\b\i Skin detection:\tab\i0\par
+\b0\i Method:\i0\par
+(Same as that used on previous dataset)\par
+\i Results:\par
+\i0 Image16\par
+Image16_1\par
+Image17\par
+Image17_1\par
+Image18\par
+Image18_1\par
+\i Observations:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Skin detection is working fine for cases when there isn't color similar to skin in the background. As can be seen in images 16 and 18, the back wall has brown, which is similar to the skin color. Therefore skin detection is better in 16 where the background is less seen compared to 18.\i\par
+\i0{\pntext\f1\'B7\tab}In image 17, it can be seen that the color of the sari is similar to that of skin, so it is not being segmented out.\i\par
+\pard\sa200\sl276\slmult1 Conclusions:\i0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Segmentation of two hands in a complex background is difficult, because the background might have colors close to skin.\i\par
+\i0{\pntext\f1\'B7\tab} Setting the appropriate threshold is hard, because the skin color will vary depeding on various lighting conditions.\i\par
+\pard\sa200\sl276\slmult1\ul\i0\par
+\pard\sa200\sl276\slmult1\ulnone\b\i Edge-detection:\par
+\b0\i0 Looking at the dataset, it can be seen that the hands are the most prominent in the image. And considering that they are the area of interest in the image, the lighting conditions must have been choosen to highlight the hand. Taking this assumption, we thought if we tried edge detection, and set an appropriate threshold, we should be able to get the boundaries of the hand.\par
+\i Theory:\par
+\i0\tab Edge detection is a fundamental tool in image processing, machine vision and computer vision, particularly in the areas of feature detection and feature extraction, which aim at identifying points in a digital image at which the image brightness changes sharply or, more formally, has discontinuities. \par
+The gradient operator is sensitive to local gray level changes and is therefore a convenient tool to detect edges. If the magnitude  of the gradient image is larger than a threshold value, the pixel  can be considered as on an edge.\par
+Mathematically, for an image function, f(x,y), the gradient magnitude, g(x,y) and the gradient direction, (x,y) are computed as \par
+ Image19\par
+where,\par
+Image20\par
+\par
+and n is a small integer, usually unity. For example, the simplest implementation of this would be to convolve the following mask with the image data, aligning the mask with the x and y axes to compute the values of  delta x and delta y.\par
+Image21\par
+The Prewitt operator is used in image processing, particularly within edge detection algorithms. Technically, it is a discrete differentiation operator, computing an approximation of the gradient of the image intensity function. At each point in the image, the result of the Prewitt operator is either the corresponding gradient vector or the norm of this vector. The Prewitt operator is based on convolving the image with a small, separable, and integer valued filter in horizontal and vertical direction and is therefore relatively inexpensive in terms of computations. On the other hand, the gradient approximation which it produces is relatively crude, in particular for high frequency variations in the image.\par
+Mathematically, the operator uses two 3\'d73 kernels which are convolved with the original image to calculate approximations of the derivatives - one for horizontal changes, and one for vertical. If we define  as the source image, and  and  are two images which at each point contain the horizontal and vertical derivative approximations, the latter are computed as:\par
+Image22\par
+The Sobel operator is used in image processing, particularly within edge detection algorithms. Technically, it is a discrete differentiation operator, computing an approximation of the gradient of the image intensity function. At each point in the image, the result of the Sobel operator is either the corresponding gradient vector or the norm of this vector. The Sobel operator is based on convolving the image with a small, separable, and integer valued filter in horizontal and vertical direction and is therefore relatively inexpensive in terms of computations. On the other hand, the gradient approximation that it produces is relatively crude, in particular for high frequency variations in the image.\par
+Mathematically, the operator uses two 3\'d73 kernels which are convolved with the original image to calculate approximations of the derivatives - one for horizontal changes, and one for vertical. If we define A as the source image, and Gx and Gy are two images which at each point contain the horizontal and vertical derivative approximations, the computations are as follows:\par
+Image23\par
+\i Method:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Compose an image into column and row vectors\par
+{\pntext\f1\'B7\tab}Apply filter in each direction\par
+{\pntext\f1\'B7\tab}Look at output\par
+{\pntext\f1\'B7\tab}Find proper threshold to eliminate intensity changes below threshold\par
+\pard\sa200\sl276\slmult1\i Result:\par
+\i0 Image 16\par
+Gradient:\par
+Image16_3\par
+Sobel:\par
+Image 16_1\par
+thres = 0.09\par
+Prewitt:\par
+image16_1\par
+thres = 0.09\par
+Sobel and Prewitt give similar results.\par
+Image 24\par
+Thres: 0.09\par
+Gradient:\par
+Image24_1\par
+Sobel:\par
+Image24_2\par
+\par
+\i Observations:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 For each image, trying to find the edges of the hand are difficult, because threshold needed keeps changing\par
+{\pntext\f1\'B7\tab}The images for Sobel and Prewitt are similar\par
+{\pntext\f1\'B7\tab}The gradient method is not useful, because the edges are not being detected soo definitely as expected.\par
+{\pntext\f1\'B7\tab}The boundaries are not as "full" as we need it to be, to carry out further operations\par
+\pard\sa200\sl276\slmult1\i Conclusions:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Gradient method is not a good method for the given dataset\par
+{\pntext\f1\'B7\tab}The hands in the image can be segmented out, but for each image a different threshold is needed, which makes it a hard problem to solve.\par
+{\pntext\f1\'B7\tab}The edges detected don't give the boundary required, so need to use a different method.\par
+\pard\sa200\sl276\slmult1\b\i Color based K-means clustering:\par
+\b0 Theory:\i0\par
+K-means (MacQueen, 1967) is one of the simplest unsupervised learning algorithms that solve the well known clustering problem. The procedure follows a simple and easy way to classify a given data set through a certain number of clusters (assume k clusters) fixed a priori. The main idea is to define k centroids, one for each cluster. These centroids shoud be placed in a cunning way because of different location causes different result. So, the better choice is to place them as much as possible far away from each other. The next step is to take each point belonging to a given data set and associate it to the nearest centroid. When no point is pending, the first step is completed and an early groupage is done. At this point we need to re-calculate k new centroids as barycenters of the clusters resulting from the previous step. After we have these k new centroids, a new binding has to be done between the same data set points and the nearest new centroid. A loop has been generated. As a result of this loop we may notice that the k centroids change their location step by step until no more changes are done. In other words centroids do not move any more.\par
+Finally, this algorithm aims at minimizing an objective function, in this case a squared error function. The objective function\par
+Image25\par
+where           Image26            is a chosen distance measure between a data point  and the cluster centre , is an indicator of the distance of the n data points from their respective cluster centres.\par
+A Lab color space is a color-opponent space with dimension L for lightness and a and b for the color-opponent dimensions, based on nonlinearly compressed CIE XYZ color space coordinates.\par
+Image27\b\i  \b0\i0\par
+\i Method:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Conver the image into the LAB color space\par
+{\pntext\f1\'B7\tab}Classify the colors in planes A, and B space using K-means clustering\par
+{\pntext\f1\'B7\tab}Label every pixel in the imae using the results from the K-means\par
+{\pntext\f1\'B7\tab}Create Image that Segment the image by color\par
+{\pntext\f1\'B7\tab}Identify which image contains the hand, by using skin-detection\par
+\pard\sa200\sl276\slmult1\i Results:\par
+\i0 Image28\par
+Image28_1\par
+Image29\par
+Image29_1\par
+Image30\par
+Image30_1\par
+Image31\par
+Image31_1\par
+\i Observations:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 The results are pretty good, expect for the small regions in the image which have a color similar to skin. \par
+{\pntext\f1\'B7\tab}In 30_1, it can be seen that the sari is not detected, as it was during skin detection.\par
+{\pntext\f1\'B7\tab}And in some cases, the neck is being detected too, which could cause a problem in PR.\par
+\pard\sa200\sl276\slmult1\i Conclusion:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 K-means clustering is helpful in seperating the hands from the rest of the image, but it still has the same effect that skin detection had, which might creat a problem.\par
+{\pntext\f1\'B7\tab}Comparitively, this gives better results than skin detection, because the sari which was detected in skin detection is not considered as skin.\par
+\pard\sa200\sl276\slmult1\b\i Distinguishing between hands:\par
+\ul\b0 Boundary Extraction:\par
+\ulnone Method:\ul\par
+\ulnone\i0 We thought we would apply boundary extraction as done for the first dataset.\par
+\i Results:\par
+\i0 Image28_1\par
+Image28_3\i\par
+\i0 Image29_1\par
+Image29_3\par
+Image30_1\par
+Image30_3\par
+Image31_1\par
+Image31_3\par
+\i Observations:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Since the image was not segmented properly, overlapping boundaries are getting mixed up, as in 29_3 and 31_3\par
+{\pntext\f1\'B7\tab}Individual hands are lost in the binarization, as in 29_3 and 31_3\par
+{\pntext\f1\'B7\tab}Segmentation of non-overlapping hands is good, as in 30_3, and 28_3.\par
+\pard\sa200\sl276\slmult1\i Conclusion:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Boundary extraction cannot work for distinguishing between the two hands, because when the hands overlap, the data of each hand is lost. Therefore, another method must be tried.\par
+\pard\sa200\sl276\slmult1\ul\i Watershed transform:\par
+\ulnone Theory:\par
+\i0 The term watershed refers to a ridge that divides areas drained by different river systems. A catchment basin is the geographical area draining into a river or reservoir.\par
+Any greytone image can be considered as a topographic surface. If we flood this surface from its minima and, if we prevent the merging of the waters coming from different sources, we partition the image into two different sets: the catchment basins and the watershed lines. If we apply this transformation to the image gradient, the catchment basins should theoretically correspond to the homogeneous grey level regions of this image. \par
+\i Method:\par
+\i0 We had a problem with overlapping hands in the previous method, so we thought watershed transform will help us over this problem\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Find gradient of image\par
+{\pntext\f1\'B7\tab}Mark the foreground objects, using morpholocial operations\par
+{\pntext\f1\'B7\tab}Similarly, mark the background objects, by looking for similar pixels that are not connected.\par
+{\pntext\f1\'B7\tab}Compute watershed transform\i\par
+\pard\sa200\sl276\slmult1 Results:\par
+WIll be presented in final report.\par
+\b Problems faced:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b0\i0 Segementation in a complex background, especially when background colors are similar to that of skin\i\par
+\i0{\pntext\f1\'B7\tab}Implementing the Watershed transform for our case\i\par
+\i0{\pntext\f1\'B7\tab}Distinguishing between the two hands\i\par
+\pard\sa200\sl276\slmult1\b Segmentation of decorated hand:\par
+\b0 Data considered:\par
+Image32\par
+Image33\par
+Image34\par
+Constraints:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Plain background\i\par
+\i0{\pntext\f1\'B7\tab}Hand filled with mehendi, and bangles.\i\par
+\pard\sa200\sl276\slmult1 Method:\i0\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 Do color segmentation to find finger tips\par
+{\pntext\f1\'B7\tab}Use morphological operations to get rid of unwanted detections\par
+\pard\sa200\sl276\slmult1\i Results:\par
+\i0 Image32\par
+Image32_1\par
+Image33\par
+Image33_1\par
+Image34\par
+Image34_1\par
+\i Obsverations:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 When doing color detection, the mehendi in the center will get detected too, but since it is bigger than the fingers, it can be removed.\par
+{\pntext\f1\'B7\tab}The bangles that were identified were not removable because the size is same as fingers in the case 34, because of the angle of the photo, but for 32,a nd 33 it is not a problem because of the shape of the bangles.\par
+{\pntext\f1\'B7\tab}Segmentation of overlapping fingers is not a problem as can be seen in 32_1\par
+\pard\sa200\sl276\slmult1\i Conclusions:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\i0 Segmentation of hands in a plain background is not difficult, unless the angle the image is taken causes problem.\par
+{\pntext\f1\'B7\tab}Finger positions are accurately found\par
+\pard\sa200\sl276\slmult1\b Future Work:\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\b0 Improve segmentation for two hand mudras\par
+{\pntext\f1\'B7\tab}Implement watershed transform\par
+{\pntext\f1\'B7\tab}Segment decorated hands\par
+{\pntext\f1\'B7\tab}Identify mudra postions.\par
+\pard\sa200\sl276\slmult1\par
+\par
+\i\par
+\i0\par
+}
+ 
